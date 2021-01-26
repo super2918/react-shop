@@ -1,0 +1,39 @@
+@import './reset';
+
+$main-color: tomato;
+
+.title-big {
+  font-size: 100px;
+}
+
+div.container {
+
+  h4.title-big {
+    color: $main-color;
+  }
+
+  p {
+    color: green;
+  }
+
+}
+
+@mixin alert() {
+  background: #eee;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  color: #000;
+}
+
+.my-alert {
+  @include alert();
+}
+
+.my-alert2 {
+  @extend .my-alert;  // 속성을 다 복사
+  background: hotpink;
+  color: white;
+}
