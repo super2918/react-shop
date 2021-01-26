@@ -3,6 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import Data from './data';
+import Detail from './Detail';
+
+import { Link, Route, Switch } from 'react-router-dom';
+
 
 function App() {
 
@@ -15,8 +19,8 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
+            <Nav.Link><Link to="/">Home</Link></Nav.Link>
+            <Nav.Link><Link to="/detail">Detail</Link></Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -28,30 +32,47 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
 
-      <Jumbotron className="bg-main">
-        <h1>20% Season OFF</h1>
-        <p>
-          This is a simple hero unit, a simple jumbotron-style component for calling
-          extra attention to featured content or information.
-        </p>
-        <p>
-          <Button variant="primary">Learn more</Button>
-        </p>
-      </Jumbotron>
+      <Switch>
+        <Route exact path="/">
+          <Jumbotron className="bg-main">
+            <h1>20% Season OFF</h1>
+            <p>
+              This is a simple hero unit, a simple jumbotron-style component for calling
+              extra attention to featured content or information.
+            </p>
+            <p>
+              <Button variant="primary">Learn more</Button>
+            </p>
+          </Jumbotron>
 
-      <div className="container">
-        <div className="row">
-          {
-            shoes.map((item, i) => {
-              return <Card shoes={shoes[i]} index={i} key={i} />
-            })
-          }
-        </div>
-      </div>
+          <div className="container">
+            <div className="row">
+              {
+                shoes.map((item, i) => {
+                  return <Card shoes={shoes[i]} index={i} key={i} />
+                })
+              }
+            </div>
+          </div>
+
+        </Route>
+
+        <Route path="/detail">
+          <Detail />
+        </Route>
+
+        <Route path="/:id">
+          <div>아무거나 보여줘라 </div>
+        </Route>
+
+      </Switch>
+
+      {/* <Route path="/어쩌구"  component={Modal}></Route> */}
 
     </div>
   );
 }
+
 
 function Card(props) {
   return(
