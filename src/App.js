@@ -7,6 +7,8 @@ import Detail from './Detail';
 
 import { Link, Route, Switch } from 'react-router-dom';
 
+// 컴포넌트 lifecycle 
+// hook 컴퍼넌트 중간에 뭔가 명령어를 넣어줄 수 있다.
 
 function App() {
 
@@ -19,8 +21,8 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link><Link to="/">Home</Link></Nav.Link>
-            <Nav.Link><Link to="/detail">Detail</Link></Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -65,10 +67,9 @@ function App() {
           <div>아무 문자나 받는 URL 작성명 parameter 작성법</div>
         </Route>
 
-      </Switch>
+      </Switch>eslintcache
 
       {/* <Route path="/어쩌구"  component={Modal}></Route> */}
-
     </div>
   );
 }
