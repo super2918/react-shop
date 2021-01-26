@@ -10,7 +10,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
 
-  let [ shoes, setShoes ] = useState(Data);
+  let [ shoes, setShoes ] = useState(Data); // 제일중요한 데이터는 App.js 상위컴포넌트에서 하위로 넘기는것
 
   return (
     <div className="App">
@@ -56,13 +56,13 @@ function App() {
           </div>
 
         </Route>
-
-        <Route path="/detail">
-          <Detail />
+        {/* id: id */}
+        <Route path="/detail/:id">
+          <Detail shoes={shoes} />
         </Route>
 
         <Route path="/:id">
-          <div>아무거나 보여줘라 </div>
+          <div>아무 문자나 받는 URL 작성명 parameter 작성법</div>
         </Route>
 
       </Switch>

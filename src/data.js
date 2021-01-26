@@ -14,7 +14,7 @@ export default [
   },
 
   {
-    id : 2,
+    id : 2, // 영국적인 id값
     title : "Grey Yordan",
     content : "Born in the States",
     price : 130000

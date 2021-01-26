@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
-function Detail( ) {
+function Detail(props) {
   // google
+  let { id } = useParams(); // 사용자가 입력한 파라메터가 들어가있다. /:id 값 뒤로 오는 것들
+  let seletItem = props.shoes.find((item) => item.id = id);
+  //  찾은 상품  = props.shoes.find((상품) => 상품.id = id); 
+  console.log(seletItem.id);
   let history = useHistory(); 
 
   return (
     <div className="container">
     <div className="row">
       <div className="col-md-6">
-        <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        <img src={ 'https://codingapple1.github.io/shop/shoes' + seletItem.id + '.jpg' } width="100%" />
       </div>
       <div className="col-md-6 mt-4">
-        <h4 className="pt-5">상품명</h4>
-        <p>상품설명</p>
-        <p>120000원</p>
+        <h4 className="pt-5">{seletItem.title}</h4>
+        <p>{seletItem.content}</p>
+        <p>{seletItem.price}</p>
         <button className="btn btn-danger">주문하기</button> 
         <button className="btn btn-danger" onClick={() => { history.push('/sdkfjlksjfdlksd')}}>뒤로가기</button> 
       </div>
@@ -22,7 +26,9 @@ function Detail( ) {
   </div> 
   )
 }
-
-
+// 자료 순서가 변경되면 상세페이지도 문제
+// 정렬이될 경우 데이터가 정렬의 기준으로 정렬이 되어버리는데 
+// 그럼 해당 id가 정렬된 순서로 상품이 변화가 되어버린다.
+// Datil.js  데이터 바인딩시 0 번째상품을 보여주세요가 아니라 상품의 고유 id의 0번째 상품을 보여줘야 한다는 것이다.
 
 export default Detail; // Detail이라는 것을 내뱉는 것 
