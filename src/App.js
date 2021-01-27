@@ -1,8 +1,19 @@
 import { Navbar, Nav, NavDropdown, Button, Jumbotron } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Data from './data';
+import Detail from './Detail';
+
+import { Link, Route, Switch } from 'react-router-dom';
+
+// 컴포넌트 lifecycle 
+// hook 컴퍼넌트 중간에 뭔가 명령어를 넣어줄 수 있다.
 
 function App() {
+
+  let [ shoes, setShoes ] = useState(Data); // 제일중요한 데이터는 App.js 상위컴포넌트에서 하위로 넘기는것
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg" className="">
@@ -57,5 +68,18 @@ function App() {
     </div>
   );
 }
+
+
+function Card(props) {
+  return(
+    <div className="col-md-4">
+      <img src={ 'https://codingapple1.github.io/shop/shoes' + (props.index + 1) + '.jpg' } width="100%"/>
+      <h4>{ props.shoes.title }</h4>
+      <p>{ props.shoes.content }</p>
+      <span>{ props.shoes.price }</span>
+    </div>
+  )
+}
+
 
 export default App;
