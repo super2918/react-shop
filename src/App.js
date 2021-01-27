@@ -58,7 +58,8 @@ function App() {
             </div>
           </div>
           <button type="button" className="btn btn-primary" onClick={() => {
-
+            // 더보여줄 상품이 없을 경우, 근데 또 사옹자가 버튼을 누를경우
+            // 실패시 사용자에게 알림 ui를 제공한다.
             // axios.post('서버URL', {id: 'id1111', pw: 1234}).then()
             
             // 로딩중이라는 ui 띄움
