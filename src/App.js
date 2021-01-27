@@ -58,24 +58,21 @@ function App() {
             </div>
           </div>
           <button type="button" className="btn btn-primary" onClick={() => {
-            //  요청을 한다. -서버 요청 
-            // axios 쓰면 json 파일을 Object파일을 알아서 바꿔준다.
+
+            // axios.post('서버URL', {id: 'id1111', pw: 1234}).then()
+            
+            // 로딩중이라는 ui 띄움
+
             axios.get('https://codingapple1.github.io/shop/data2.json')
             .then((result) => {
-              // 성공했을 때
-              // console.log('성공했다');
-              // console.log(result.data);
-              // 무조건 직접바꾸면 안된다. 카피본을 set할 경우 생성하고 작업을 해야한다는 점
-              // [...shoes] 카피본 생성 
+              console.log(result.data);
+              // 로딩중이라는 ui 안보이게 처리
               setShoes([...shoes, ...result.data]);
             })
             .catch(() => {
-              // 실패했을때
-              console.log('실패했다.')
+              // 로딩중이라는 ui 안보이게
+              console.log('실패');
             })
-
-            // javascript - 차이점 
-            // fetch('https://codingapple1.github.io/shop/data2.json').then()
           
           }}>더보기</button>
 

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -18,6 +19,9 @@ function Detail(props) {
   // lifecycle hook = useEffect hook 컴포넌트가 mount되었을때 컴포넌트가 update가 될때 특정 코드 실행 
   // useEffect 여러개 써도 상관없다. 하나 안에 사용한다던지 아니면 여러개를 사용하여 다시 만든다.
   useEffect(() => {
+
+    axios.get(); // Detail 컴포넌트 등장시 실행할 코드, 업데이트가 x , 요청을 할 경우
+
     let timer = setTimeout(() => { setShowAlert(false) }, 1000);
     console.log('계속실행 ');
     return () => { clearTimeout(timer) } // 버그가 생기는 부분도 고려해야 한다.
@@ -26,9 +30,11 @@ function Detail(props) {
     // return function 어쩌구 () {  return 이건 > 함수를 실행 
     //   실행코드
     // }
-  },[showAlert, input]); 
-  // showAlert라는 state가 변경이 될때만 되라 
-  // [] 아무것도 없을 때만 실행이 되세요 / 딱 로드가 실행 될때 한번만 된다.
+
+  },[]); 
+  // [showAlert, input] showAlert라는 state가 변경이 될때만 되라 
+  // [] 업데이시엔 아무것도 없을 때만 실행이 되세요 / 딱 로드가 실행 될때 한번만 된다.
+  
   let { id } = useParams(); // 사용자가 입력한 파라메터가 들어가있다. /:id 값 뒤로 오는 것들
   let history = useHistory(); 
   let seletItem = props.shoes.find((item) => item.id = id);
