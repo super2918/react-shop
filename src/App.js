@@ -8,12 +8,10 @@ import axios from 'axios';
 
 import { Link, Route, Switch } from 'react-router-dom';
 
-// 컴포넌트 lifecycle 
-// hook 컴퍼넌트 중간에 뭔가 명령어를 넣어줄 수 있다.
-
 function App() {
 
-  let [ shoes, setShoes ] = useState(Data); // 제일중요한 데이터는 App.js 상위컴포넌트에서 하위로 넘기는것
+  let [ shoes, setShoes ] = useState(Data); 
+  let [ stock, setStock ] = useState([10, 11, 12]);
 
   return (
     <div className="App">
@@ -58,20 +56,13 @@ function App() {
             </div>
           </div>
           <button type="button" className="btn btn-primary" onClick={() => {
-            // 더보여줄 상품이 없을 경우, 근데 또 사옹자가 버튼을 누를경우
-            // 실패시 사용자에게 알림 ui를 제공한다.
-            // axios.post('서버URL', {id: 'id1111', pw: 1234}).then()
-            
-            // 로딩중이라는 ui 띄움
 
             axios.get('https://codingapple1.github.io/shop/data2.json')
             .then((result) => {
               console.log(result.data);
-              // 로딩중이라는 ui 안보이게 처리
               setShoes([...shoes, ...result.data]);
             })
             .catch(() => {
-              // 로딩중이라는 ui 안보이게
               console.log('실패');
             })
           
@@ -80,7 +71,7 @@ function App() {
         </Route>
         {/* id: id */}
         <Route path="/detail/:id">
-          <Detail shoes={shoes} />
+          <Detail shoes={shoes} stock={stock} setStock={setStock} />
         </Route>
 
         <Route path="/:id">
@@ -88,8 +79,6 @@ function App() {
         </Route>
 
       </Switch>
-
-      {/* <Route path="/어쩌구"  component={Modal}></Route> */}
     </div>
   );
 }

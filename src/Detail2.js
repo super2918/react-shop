@@ -42,9 +42,6 @@ function Detail(props) {
   </div> 
   )
 }
-// 자료 순서가 변경되면 상세페이지도 문제
-// 정렬이될 경우 데이터가 정렬의 기준으로 정렬이 되어버리는데 
-// 그럼 해당 id가 정렬된 순서로 상품이 변화가 되어버린다.
-// Datil.js  데이터 바인딩시 0 번째상품을 보여주세요가 아니라 상품의 고유 id의 0번째 상품을 보여줘야 한다는 것이다.
 
-export default Detail; // Detail이라는 것을 내뱉는 것 
+
+export default Detail;
