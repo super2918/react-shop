@@ -1,13 +1,14 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss';
-
+import { stockcontext } from './App.js';
 
 function Detail(props) {
   let [ showAlert, setShowAlert ] = useState(true);
   let [ input, setInput ] = useState('');
+  let stock = useContext(stockcontext); // import해서 사용하면 된다.
 
   useEffect(() => {
     axios.get(); // Detail 컴포넌트 등장시 실행할 코드, 업데이트가 x , 요청을 할 경우
