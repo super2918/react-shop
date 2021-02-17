@@ -1,14 +1,19 @@
 import axios from 'axios';
+import {  Nav  } from 'react-bootstrap';
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss';
+import { CSSTransition } from 'react-transition-group';
 import { stockcontext } from './App.js';
 
 function Detail(props) {
   let [ showAlert, setShowAlert ] = useState(true);
   let [ input, setInput ] = useState('');
   let stock = useContext(stockcontext); // import해서 사용하면 된다.
+
+  let [tab, setTab] = useState(0); // tab status저장
+  let [aniSwitch, setAniSwitch] = useState(false);
 
   useEffect(() => {
     axios.get(); // Detail 컴포넌트 등장시 실행할 코드, 업데이트가 x , 요청을 할 경우
@@ -67,8 +72,40 @@ function Detail(props) {
         <button className="btn btn-danger" onClick={() => { history.push('/sdkfjlksjfdlksd')}}>뒤로가기</button> 
       </div>
     </div>
+
+    <Nav className="mt-5" variant="tabs" defaultActiveKey="/link-0"> 
+      <Nav.Item>
+        <Nav.Link eventKey="link-0" onClick={() => {setAniSwitch(false); setTab(0)}}>0</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-1" onClick={() => {setAniSwitch(false); setTab(1)}}>Option 1</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+      <Nav.Link eventKey="link-2" onClick={() => {setAniSwitch(false); setTab(2)}}>Option 2</Nav.Link>
+      </Nav.Item>
+    </Nav>
+
+    <CSSTransition in={aniSwitch} classNames="ani" timeout={500}>
+      <TabContent tab = { tab } setAniSwitch={setAniSwitch} />
+    </CSSTransition>
+
   </div> 
   )
+}
+
+function TabContent(props) {
+
+  useEffect(() => {
+    props.setAniSwitch(true); // tab 내용 컴포넌트가 로드될 떄 true
+  });
+
+  if(props.tab === 0) {
+    return <div>0 번째 내용입니다.</div>
+  } else if (props.tab === 1) {
+    return <div>1 번째 내용입니다.</div>
+  } else if (props.tab === 2) {
+    return <div>2 번째 내용입니다.</div>
+  }
 }
 
 function Info(props) {

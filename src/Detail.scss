@@ -2,6 +2,14 @@
 
 $main-color: tomato;
 
+.ani-enter {
+  opacity: 0;
+}
+.ani-enter-active {
+  opacity: 1;
+  transition: all 0.5s;
+}
+
 .title-big {
   font-size: 100px;
 }
