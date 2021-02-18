@@ -4,6 +4,7 @@ import './App.css';
 import React, { useContext, useState } from 'react';
 import Data from './data';
 import Detail from './Detail';
+import Cart from './Cart';
 import axios from 'axios';
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -83,8 +84,12 @@ function App() {
           </stockcontext.Provider>
         </Route>
 
-        <Route path="/:id">
+        {/* <Route path="/:id">
           <div>아무 문자나 받는 URL 작성명 parameter 작성법</div>
+        </Route> */}
+
+        <Route path="/cart">
+          <Cart></Cart>
         </Route>
 
       </Switch>
