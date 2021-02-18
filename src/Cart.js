@@ -15,18 +15,23 @@ function Cart(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{ props.state[0].id}</td>
-            <td>{ props.state[0].name }</td>
-            <td>{ props.state[0].quan}</td>
-            <td>테스트 중</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>{ props.state[0].name }</td>
-            <td>{ props.state[0].name }</td>
-            <td>테스트 중</td>
-          </tr>
+          {
+            
+            props.state.map((a, i) => {
+              return  (
+                <tr key={i}>
+                  <td>{ a.id }</td>
+                  <td>{ a.name }</td>
+                  <td>{ a.quan }</td>
+                  {/* 데이터를 수정할 경우 1.reducer 수정 2. dispatch()  reducer에 만들어둔 'increase' 요청*/}
+                  <td>
+                    <button onClick={() => {props.dispatch({type: 'increase'})}}>+</button>
+                    <button onClick={() => {props.dispatch({type: 'decrease'})}}>-</button>
+                  </td>
+                </tr>
+              )
+            })
+          }
         </tbody>
       </Table>
     </div>

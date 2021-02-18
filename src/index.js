@@ -15,13 +15,44 @@ import { createStore } from 'redux';
 
 // state 초기값
 // let store = createStore(() => { return [ { id: 0, name: '멋진신발', quan: 2 }] })
-let store = createStore(() => { return [{ id: 0, name: '멋진신발', quan: 2}]})
+// let store = createStore(() => { 
+//   return [
+//     { id: 0, name: '멋진신발', quan: 2},
+//     { id: 1, name: '멋진신발2', quan: 1}
+//   ]
+// });
 
+// 초기 state값
+let initialState = [
+  { id: 0, name: '멋진신발', quan: 2},
+  { id: 1, name: '멋진신발2', quan: 1}
+];
 
+// state 데이터의 수정 방법 : reducer 정의
+// reducer 수정된 state를 리턴하는 함수 퉤 뱉어 주는 역할
+// state = defaultState 기본 파라미터 디폴트 state 초기값  es6
+function reducer ( state = initialState, action ) {
+  // 수량이 증가할 경우 
+  if(action.type === 'increase') {
+    let copy = [...state]; // deep cpoy
+    copy[0].quan++;
+    return copy; 
+  } else if (action.type === 'decrease')  {
+    let copy = [...state]; // deep cpoy
+    copy[0].quan--;
+    return copy; 
+  }else {
+    return initialState;
+  }
+  return state
+}
+
+let store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename="">
+      {/* 같은 store안에 있는 모든 컴포넌트들에게 state값을 전달하고 싶어서  */}
       <Provider store={store}>
         <App />
       </Provider>
