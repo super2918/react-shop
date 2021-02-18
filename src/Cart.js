@@ -1,4 +1,4 @@
-import React from  'react';
+import React, { useEffect, memo } from  'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -43,9 +43,38 @@ function Cart(props) {
         </div>
         : null 
        }
+
+       <Parent name='존박' age='20' />
     </div>
   )
 }
+
+function Parent(props) {
+  return (
+    <div>
+      {/* <Child1 name={props.name}></Child1>
+      <Child2 name={props.age}></Child2> */}
+      <Child1 name={props.name}></Child1>
+      <Child2 age={props.age}></Child2>
+    </div>
+  )
+}
+
+function Child1() {
+  useEffect(() => {console.log('랜더링1')})
+  return (
+    <div>111</div>
+  )
+}
+
+let Child2 = memo(function () { 
+  // memo 불필요한 재랜더링을 하지 않기 위함 memoraize 직접적인 props의 변경이 있을때만 작동을한다.
+  // 단점 : 기존 props vs 바뀐 props 비교연산후 컴포넌트 업데이트를 할지말지 결정함
+  useEffect(() => {console.log('랜더링2')})
+  return (
+    <div>222</div>
+  )
+})
 
 // redux store 데이터를 다 가지고와서 props로 변환해주는 함수
 function stateProps (state) {

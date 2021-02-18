@@ -1,12 +1,13 @@
+import React, { useContext, useState,  lazy, Suspense } from 'react';
 import { Navbar, Nav, NavDropdown, Button, Jumbotron } from 'react-bootstrap';
-import logo from './logo.svg';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
-import React, { useContext, useState } from 'react';
 import Data from './data';
-import Detail from './Detail';
+// import Detail from './Detail';
 import Cart from './Cart';
 import axios from 'axios';
-import { Link, Route, Switch, useHistory } from 'react-router-dom';
+
+const Detail = lazy(() => import('./Detail')); // 순서도 문제가 있다.
 
 export  let stockcontext = React.createContext(); // 1.값은 값을 공유할 범위를 생성, 다른 파일에도 적용하고 싶으면 export하면 된다.
 
@@ -81,7 +82,9 @@ function App() {
         {/* id: id */}
         <Route path="/detail/:id">
           <stockcontext.Provider value={stock}>
-            <Detail shoes={shoes} stock={stock} setStock={setStock} />
+            <Suspense fallback={<div>로딩중입니다.</div>}>
+              <Detail shoes={shoes} stock={stock} setStock={setStock} />
+            </Suspense>
           </stockcontext.Provider>
         </Route>
 
