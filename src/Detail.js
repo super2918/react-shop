@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import './Detail.scss';
 import { CSSTransition } from 'react-transition-group';
 import { stockcontext } from './App.js';
+import { connect } from 'react-redux';
 
 function Detail(props) {
   let [ showAlert, setShowAlert ] = useState(true);
@@ -67,9 +68,13 @@ function Detail(props) {
         <p>{seletItem.price}</p>
 
         <Info stock={props.stock}></Info>
-        <button className="btn btn-danger" onClick={() => { props.setStock([9]) }}>주문하기</button> 
+        <button className="btn btn-danger" onClick={() => {
+          props.setStock([9])
+          props.dispatch({type: 'addItem', payload: { id: 2, name: '새로운 상품', quan: 2 }});
+          history.push('/cart');
+          }}>주문하기</button> 
         {/*  props.setStock count-- */}
-        <button className="btn btn-danger" onClick={() => { history.push('/sdkfjlksjfdlksd')}}>뒤로가기</button> 
+        <button className="btn btn-danger" onClick={() => { history.push('/')}}>뒤로가기</button> 
       </div>
     </div>
 
@@ -114,4 +119,12 @@ function Info(props) {
   )
 }
 
-export default Detail;
+function stateProps(state){
+  console.log(state);
+  return{
+    state: state.render
+  }
+}
+
+export default connect(stateProps)(Detail)
+// export default Detail;

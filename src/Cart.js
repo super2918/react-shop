@@ -25,6 +25,7 @@ function Cart(props) {
                   <td>{ a.quan }</td>
                   {/* 데이터를 수정할 경우 1.reducer 수정 2. dispatch()  reducer에 만들어둔 'increase' 요청*/}
                   <td>
+                    {/* props.dispatch ---> action */}
                     <button onClick={() => {props.dispatch({type: 'increase'})}}>+</button>
                     <button onClick={() => {props.dispatch({type: 'decrease'})}}>-</button>
                   </td>
@@ -34,6 +35,7 @@ function Cart(props) {
           }
         </tbody>
       </Table>
+
       {/* 굳이 다른 컴포넌트에 필요하징 않는 것들은 reducer에 넣을 필요가 없고 useState로 하는 것이 좋다 */}
        { 
         props.alertOpend === true

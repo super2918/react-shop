@@ -41,8 +41,11 @@ let initialState = [
 // reducer 수정된 state를 리턴하는 함수 퉤 뱉어 주는 역할
 // state = defaultState 기본 파라미터 디폴트 state 초기값  es6
 function reducer ( state = initialState, action ) {
-  // 수량이 증가할 경우 
-  if(action.type === 'increase') {
+  if( action.type === 'addItem') {
+    let copy = [...state]; // deep cpoy
+    copy.push(action.payload); // dispatch할 때 함께 데이터 전송, 전송한 데이터를 사용하려면
+    return copy;
+  } else if  (action.type === 'increase') {
     let copy = [...state]; // deep cpoy
     copy[0].quan++;
     return copy; 
