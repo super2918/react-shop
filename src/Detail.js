@@ -23,6 +23,30 @@ function Detail(props) {
     return () => { clearTimeout(timer) } // 버그가 생기는 부분도 고려해야 한다.
   },[]); 
 
+
+  // 1. 누가 Detail페이지에 들어가면
+  // 2. localStorage에 있는 항목을 꺼내고
+  // 3. 경우가 두가지 있는데 null or [] 가 나온다. 
+  // 4. []가 나오면 거기에 url 파라미터 id부분을 push()추가함
+  // 5. 중복처리한다. 0이 있으면 set 자료형 찾아보기 
+  // 6. 그러면 []를 다시 localStorage를 저장함(따옴표)
+
+  useEffect(() => { //1.
+    var arr = localStorage.getItem('watched'); //2.
+    if(arr == null ) {
+      arr = [] 
+    } else { 
+      arr = JSON.parse(arr); 
+    }//3.
+    
+    arr.push(id); //4.
+    // set자료형 중복
+    arr = new Set(arr); // 5.
+    arr = [...arr]; // 중복이 제거된 값을 array로 만든다.
+
+    localStorage.setItem('watched', JSON.stringify(arr)); //6.
+    
+  }, []);
   
   let { id } = useParams(); 
   let history = useHistory(); 
