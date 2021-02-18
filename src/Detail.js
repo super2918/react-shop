@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import './Detail.scss';
 import { CSSTransition } from 'react-transition-group';
 import { stockcontext } from './App.js';
+import { connect } from 'react-redux';
 
 function Detail(props) {
   let [ showAlert, setShowAlert ] = useState(true);
@@ -67,9 +68,14 @@ function Detail(props) {
         <p>{seletItem.price}</p>
 
         <Info stock={props.stock}></Info>
-        <button className="btn btn-danger" onClick={() => { props.setStock([9]) }}>주문하기</button> 
-        {/*  props.setStock count-- */}
-        <button className="btn btn-danger" onClick={() => { history.push('/sdkfjlksjfdlksd')}}>뒤로가기</button> 
+        <button className="btn btn-danger" onClick={() => {
+          props.setStock([9])
+          // props.dispatch({type: 'addItem', payload: { id: 1, name: '새로운 상품', quan: 1 }});
+          props.dispatch({type: 'addItem', data: { id: seletItem.id, name: seletItem.title, quan: 1 }}); // 현재 상품을 id, title s
+          // 근데 다시 저장할때 데이터가 저장이 될때 반복적으로 저장이되고 있는 버그 어떻게 변경
+          history.push('/cart');
+         }}>주문하기</button> 
+        <button className="btn btn-danger" onClick={() => { history.push('/')}}>뒤로가기</button> 
       </div>
     </div>
 
@@ -114,4 +120,13 @@ function Info(props) {
   )
 }
 
-export default Detail;
+function stateprops (state) {
+  console.log(state)
+  return {
+    state: state.reducer,
+  }
+}
+
+export default connect(stateprops)(Detail);
+
+// export default Detail;

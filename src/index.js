@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 // Browser은 셋팅이 필요할 수 있다.
 // redux setting 
 
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
 // state 초기값
@@ -41,16 +41,32 @@ let initialState = [
 // reducer 수정된 state를 리턴하는 함수 퉤 뱉어 주는 역할
 // state = defaultState 기본 파라미터 디폴트 state 초기값  es6
 function reducer ( state = initialState, action ) {
-  // 수량이 증가할 경우 
-  if(action.type === 'increase') {
+  
+  if(action.type === 'addItem') {
+    //만약에 같은 상품이 계속 주문하면 항목을 추가지않고, 수량만 증가 
+    // "id가 같은 상품이  state에 있으면 push하지 말고 id가 같은 상품의 quan을 증가"
+    // state안에 id: action.datat 인게 있냐? 
+    let found = state.findIndex((item) => { return item.id === action.data.id}) // findex, find
+    console.log(found)
+    if (found >= 0){
+      let copy = [...state]; 
+      copy[found].quan++; 
+      return copy;
+    } else {
+      let copy = [...state]; // deep cpoy
+      copy.push(action.data); // dispatch할 때 함께 데이터 전송, 전송한 데이터를 사용하려면
+      return copy;
+    }
+
+  }else if(action.type === 'increase') {
     let copy = [...state]; // deep cpoy
-    copy[0].quan++;
+    copy[action.data].quan++;
     return copy; 
   } else if (action.type === 'decrease')  {
     let copy = [...state]; // deep cpoy
-    copy[0].quan--;
+    copy[action.data].quan--;
     return copy; 
-  }else {
+  }else { 
     return initialState;
   }
   return state

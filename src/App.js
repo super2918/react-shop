@@ -6,7 +6,7 @@ import Data from './data';
 import Detail from './Detail';
 import Cart from './Cart';
 import axios from 'axios';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 export  let stockcontext = React.createContext(); // 1.값은 값을 공유할 범위를 생성, 다른 파일에도 적용하고 싶으면 export하면 된다.
 
@@ -77,6 +77,7 @@ function App() {
           }}>더보기</button>
 
         </Route>
+
         {/* id: id */}
         <Route path="/detail/:id">
           <stockcontext.Provider value={stock}>
@@ -104,9 +105,10 @@ function Card(props) {
   // 3.useContext(범위이름)로 공유된 값을 사용한다.
   // 간단한 전송은 props가 더 효율적이다.
   let stock = useContext(stockcontext); 
-
+  let history = useHistory();
   return(
-    <div className="col-md-4">
+    // 상품을 눌릴시 각각에 상세페지로 이동하는 것 - 고유의 아이디를 붙여주는 것이 좋음 props.shoes.id 
+    <div className="col-md-4" onClick={() => { history.push('/detail/' + props.shoes.id)}}> 
       <img src={ 'https://codingapple1.github.io/shop/shoes' + (props.index + 1) + '.jpg' } width="100%"/>
       <h4>{ props.shoes.title }</h4>
       <p>{ props.shoes.content }</p>
@@ -121,7 +123,7 @@ function Test() {
 
   let stock = useContext(stockcontext); // stock을 받아오는 것 props를 선언하지 않아도 한다.
 
-  return <p>재고 : {stock} </p>
+  return <p>재고 : {stock[0]} </p>
 }
 
 
