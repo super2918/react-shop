@@ -11,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 // redux setting 
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 
 // state 초기값
 // let store = createStore(() => { return [ { id: 0, name: '멋진신발', quan: 2 }] })
@@ -21,6 +21,15 @@ import { createStore } from 'redux';
 //     { id: 1, name: '멋진신발2', quan: 1}
 //   ]
 // });
+
+// let alertIinitial = true;
+function reducer2(state = true, action){
+  if(action.type === 'closeAlert') {
+    return !state;
+  } else {
+    return state;
+  }
+}
 
 // 초기 state값
 let initialState = [
@@ -46,8 +55,8 @@ function reducer ( state = initialState, action ) {
   }
   return state
 }
-
-let store = createStore(reducer);
+// conbineReudecers 상단에 들어가는 것들 한번
+let store = createStore(combineReducers({reducer, reducer2}));
 
 ReactDOM.render(
   <React.StrictMode>

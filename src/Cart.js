@@ -34,14 +34,25 @@ function Cart(props) {
           }
         </tbody>
       </Table>
+      {/* 굳이 다른 컴포넌트에 필요하징 않는 것들은 reducer에 넣을 필요가 없고 useState로 하는 것이 좋다 */}
+       { 
+        props.alertOpend === true
+        ? <div className="my-alert2">
+          <p>지금 구매하시면 신규할인 20%</p>
+          <button onClick={() => {props.dispatch({type: 'closeAlert'})}}>닫기</button>
+        </div>
+        : null 
+       }
     </div>
   )
 }
 
 // redux store 데이터를 다 가지고와서 props로 변환해주는 함수
 function stateProps (state) {
+  console.log(state)
   return {
-    state: state
+    state: state.reducer,
+    alertOpend: state.reducer2
   }
 }
 
